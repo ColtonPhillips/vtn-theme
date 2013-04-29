@@ -1,17 +1,14 @@
 from random import choice
 
 def main():
-    verbs, nouns = [], []
-    with open("verbs.txt",'r') as verb_file:
-        for line in verb_file:
-            verbs.append(line.rstrip('\r\n'))
+    with open('verbs.txt', 'r') as verbFile:
+        verbs = [verb.rstrip('\r\n') for verb in verbFile.readlines()]
 
-    with open("nouns.txt",'r') as noun_file:
-        for line in noun_file:
-            nouns.append(line.rstrip('\r\n'))
+    with open('nouns.txt', 'r') as nounFile:
+        nouns = [noun.rstrip('\r\n') for noun in nounFile.readlines()]
 
     for i in range(100):
-        print choice(verbs).title() + " the " + choice(nouns).title()
+        print '{verb} the {noun}'.format(verb=choice(verbs).title(), noun=choice(nouns).title())
 
 if __name__ == "__main__":
     main()
