@@ -1,12 +1,8 @@
 from random import choice
 
 def main():
-    with open('verbs.txt', 'r') as verbFile:
-        verbs = [verb.rstrip('\r\n') for verb in verbFile.readlines()]
-
-    with open('nouns.txt', 'r') as nounFile:
-        nouns = [noun.rstrip('\r\n') for noun in nounFile.readlines()]
-
+    verbs = open('verbs.txt').read().split()
+    nouns = open('nouns.txt').read().split()
     for i in range(100):
         print '{verb} the {noun}'.format(verb=choice(verbs).title(), noun=choice(nouns).title())
 
