@@ -9,7 +9,6 @@ public class GenerateTheme {
     }
 
     static void Main (string[] args) {
-        
         var verbs = File.ReadAllLines("verbs.txt");
         var nouns = File.ReadAllLines("nouns.txt");
 
@@ -21,5 +20,4 @@ public class GenerateTheme {
             Console.WriteLine();            
         }
     }
-
 }
