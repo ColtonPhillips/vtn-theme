@@ -3,18 +3,25 @@ import System.Random
 
 getLines = liftM lines . readFile 
 
---title = 
+themes :: [String]
+themes verbs nouns = do
+    verb <- verbs
+    nouns <- nouns
+    [verb ++ " the " ++ noun]
 
-main = do
+randomNumbers :: RandomGen g => g -> Int -> [Int]
+randomNumbers _ 0 = []
+randomNumbers gen n = let (newVal, newGen) = next gen in newVal : (randomNumbers newGen (n-1))
+
+prioritize :: Ord a => [Int] -> [a] -> [a]
+prioritize priorityLevels toPrioritize = (map snd) . sort $ (zip priorityLevels toPrioritize)
+
+main = do 
     verbs <- getLines "verbs.txt"
     nouns <- getLines "nouns.txt"
-    
-    let lengthOfVerbs = ((length verbs) - 1)
-    let lengthOfNouns = ((length nouns) - 1)
-
-  --  g <- newStdGen
-   -- random
-
-    --verbCount <- (verbs !! ((length verbs)-1))
-    --print verbCount
-    -- map  M_ putStrLn length verbs
+    let
+        seed = 2
+        seedGen = mkStdGen seed
+        priorities = randomNumbers seedGen 100
+        combos = themes verbs nouns
+    in print $ prioritize priorities combos    
