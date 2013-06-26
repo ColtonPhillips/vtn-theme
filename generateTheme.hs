@@ -3,14 +3,18 @@ import System.Random
 
 getLines = liftM lines . readFile 
 
+--title = 
+
 main = do
     verbs <- getLines "verbs.txt"
     nouns <- getLines "nouns.txt"
     
---    verb <- length verbs
+    let lengthOfVerbs = ((length verbs) - 1)
+    let lengthOfNouns = ((length nouns) - 1)
 
-    lengthOfVerbs <- (length verbs) - 1
-    print lengthOfVerbs
+  --  g <- newStdGen
+   -- random
+
     --verbCount <- (verbs !! ((length verbs)-1))
     --print verbCount
-    -- mapM_ putStrLn length verbs
+    -- map  M_ putStrLn length verbs
