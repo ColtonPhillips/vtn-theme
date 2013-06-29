@@ -71,7 +71,7 @@ int readfile(string filename, vector<string>* source) {
 }
 
 int main() {
-    srand ( unsigned ( time(0) ) );
+    srand (unsigned (time(0)));
     vector<string> verbs;
     vector<string> nouns;
     readfile("verbs.txt", &verbs);
@@ -80,7 +80,7 @@ int main() {
     random_shuffle(nouns.begin(), nouns.end());
 
     for (int i = 0; i < 100; ++i) {
-        cout <<titlecase( verbs[i] ) << " the " << titlecase(nouns[i]) << endl;
+        cout << titlecase(verbs[i]) << " the " << titlecase(nouns[i]) << endl;
     }
     return 0;
 }
