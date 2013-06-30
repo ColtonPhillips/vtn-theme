@@ -3,9 +3,11 @@
 from random import choice
 
 def main():
-    # TODO can it be this concise but still use context manager? 
-    verbs = open('verbs.txt').read().split()
-    nouns = open('nouns.txt').read().split()
+    with open('verbs.txt', 'r') as verbFile:
+        verbs = verbFile.read().split()
+    with open('nouns.txt', 'r') as nounFile:
+        nouns = nounFile.read().split()
+
     for i in range(100):
         print '{verb} the {noun}'.format(verb=choice(verbs).title(), noun=choice(nouns).title())
 
