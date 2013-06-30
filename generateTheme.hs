@@ -1,35 +1,22 @@
-import Control.Monad
-import System.Random
+import Control.Monad (forM_, liftM)
+import Data.Char (toUpper)
+import System.Random (randomRs, mkStdGen)
 import System.Time
-import Data.List
-
-getLines = liftM lines . readFile
-
-verbs :: IO [String]
-verbs = getLines "verbs.txt"
-
-nouns :: IO [String]
-nouns = getLines "nouns.txt"
-
-themes :: [String] -> [String] -> [String]
-themes verbs nouns = do
-    verb <- verbs
-    noun <- nouns
-    [verb ++ " the " ++ noun]
-
-randomNumbers :: RandomGen g => g -> Int -> [Int]
-randomNumbers _ 0 = []
-randomNumbers gen n = let (newVal, newGen) = next gen in newVal : (randomNumbers newGen (n-1))
-
-prioritize :: Ord a => [Int] -> [a] -> [a]
-prioritize priorityLevels toPrioritize = (map snd) . sort $ zip priorityLevels toPrioritize
-
+ 
+readLines :: String -> IO [String]
+readLines = liftM lines . readFile
+ 
+title :: String -> String
+title (x:xs) = (toUpper x):xs
+ 
 main = do
     (TOD _ timeSeed) <- getClockTime
-    verbList <- verbs
-    nounList <- nouns
-    let seed = fromInteger timeSeed
-        seedGen = mkStdGen seed
-        priorities = randomNumbers seedGen ((length verbList) * (length nounList))
-        combos = themes verbList nounList
-        in mapM putStrLn $ prioritize priorities combos
+    verbList <- readLines "verbs.txt"
+    nounList <- readLines "nouns.txt"
+    let vNums = randomRs (0, length verbList) (mkStdGen $ fromIntegral timeSeed)
+    let nNums = randomRs (0, length nounList) (mkStdGen $ fromIntegral (timeSeed + 1))
+    forM_ (take 100 $ zip vNums nNums) (\(v, n) -> do
+            let verb = title $ verbList !! v
+            let noun = title $ nounList !! n
+            putStrLn $ verb ++ " the " ++ noun
+        )
