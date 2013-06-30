@@ -19,8 +19,7 @@ public class GenerateTheme {
             return list;
     }
 
-    // TODO Make generic
-    public static String choose(List<String> list) {
+    public static <T> T choose(List<T> list) {
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(list.size());
         return list.get(index); 
