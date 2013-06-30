@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.io.File;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,7 +20,7 @@ public class GenerateTheme {
     }
 
     // TODO Make generic
-    public static String choose(ArrayList<String> list) {
+    public static String choose(List<String> list) {
         Random randomGenerator = new Random();
         int index = randomGenerator.nextInt(list.size());
         return list.get(index); 
