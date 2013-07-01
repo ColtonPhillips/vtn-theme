@@ -34,9 +34,19 @@ void get_line(char * filename, int i, char * word) {
             c++;
         }
     }
+    // remove newline
+    int len = strlen(line);
+    if( line[len-1] == '\n' )
+        line[len-1] = 0;
     strcpy(word, line);
 }
-
+void title(char *str) 
+{
+    if (str[0] >= 'a' && str[0] < 'z')
+    {
+        str[0]= str[0] - 32;
+    }
+}
 main()
 {
     int verbCount = count_lines("verbs.txt");
@@ -53,7 +63,8 @@ main()
         nI = rand() % nounCount;
         get_line("verbs.txt", vI, verb);
         get_line("nouns.txt", nI, noun);
-        printf("%s the %s", verb, noun);
+        title(verb); title(noun);
+        printf("%s the %s\n", verb, noun);
 
     }
 }
