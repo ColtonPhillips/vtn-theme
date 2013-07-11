@@ -1,4 +1,4 @@
-word_table = function (filename)
+read_lines = function (filename)
     local file = io.open(filename, 'r');
     local words = {}
     local count = 0
@@ -19,8 +19,8 @@ function title(str)
     return result
 end
 
-verbs, vCount = word_table("verbs.txt")
-nouns, nCount = word_table("nouns.txt")
+verbs, vCount = read_lines("verbs.txt")
+nouns, nCount = read_lines("nouns.txt")
 
 math.randomseed(os.time())
 for i = 0 ,100, 1 do
