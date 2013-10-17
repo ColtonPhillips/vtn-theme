@@ -1,30 +1,20 @@
-read_lines = function (filename)
-    local file = io.open(filename, 'r');
-    local words = {}
-    local count = 0
-    for line in file:lines() do
-        table.insert (words, line)
-        count = count + 1
-    end
-    return words, count
+function title (s)
+  return s:gsub("^%l", string.upper)
 end
-
-function title(str)
-    result = ''
-    for word in string.gfind(str, "%S+") do
-        local first = string.sub(word,1,1)
-        result = (result .. string.upper(first) ..
-            string.lower(string.sub(word,2)))
-    end
-    return result
+ 
+verbs = {}
+for verb in io.lines("verbs.txt") do
+  verbs[#verbs + 1] = verb
 end
-
-verbs, vCount = read_lines("verbs.txt")
-nouns, nCount = read_lines("nouns.txt")
-
+ 
+nouns = {}
+for noun in io.lines("nouns.txt") do
+  nouns[#nouns + 1] = noun
+end
+ 
 math.randomseed(os.time())
-for i = 0 ,100, 1 do
-    vI = math.random(0, vCount) 
-    nI = math.random(0, nCount) 
-    print(title(verbs[vI]) .. " the " .. title(nouns[nI]))
+for i = 1, 100 do
+    local v = math.random(#verbs)
+    local n = math.random(#nouns)
+    print(title(verbs[v]) .. " the " .. title(nouns[n]))
 end
