@@ -1,4 +1,4 @@
 vtn-theme
 =========
 
-A theme generatory for Verb the Noun
+Game jam theme generators for "Verb" the "Noun" in many languages.
